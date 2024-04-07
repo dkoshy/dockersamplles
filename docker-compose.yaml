@@ -1,0 +1,25 @@
+version: "3.1"
+
+services:
+  web-fe:
+    image: dkoshy08/python:weblatest
+    ports:
+      - 5001:8080
+    deploy:
+      replicas: 10
+    volumes:
+      - counter-vol:/app
+    networks:
+      - counter-net
+  
+  redis:
+    image: "redis:alpine"
+    deploy:
+      replicas: 1
+    networks:
+      - counter-net
+  
+volumes:
+  counter-vol:
+networks:
+  counter-net:
